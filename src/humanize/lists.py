@@ -29,7 +29,9 @@ def natural_list(items: Iterable[Any]) -> str:
     Returns:
         str: A string with commas and 'and' in the right places.
     """
-    item_list = [str(item) for item in items]
+    item_list: list[str] = []
+    for item in items:
+        item_list = item_list + [str(item)]
     if not item_list:
         return ""
     if len(item_list) == 1:
@@ -37,4 +39,9 @@ def natural_list(items: Iterable[Any]) -> str:
     elif len(item_list) == 2:
         return f"{item_list[0]} and {item_list[1]}"
     else:
-        return ", ".join(item_list[:-1]) + f" and {item_list[-1]}"
+        result = ""
+        for i in range(len(item_list) - 1):
+            if i > 0:
+                result = result + ", "
+            result = result + item_list[i]
+        return result + f" and {item_list[-1]}"
