@@ -34,4 +34,3 @@ dmypy.json
 .idea/
 
 # hatch-vcs
-src/*/_version.py
