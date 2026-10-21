@@ -273,8 +273,16 @@ def intword(value: NumberOrString, format: str = "%.1f") -> str:
     if value < powers[0]:
         return f"{negative_prefix}{value}"
 
-    ordinal = bisect.bisect_right(powers, value)
-    largest_ordinal = ordinal == len(powers)
+    exponents = [3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 100]
+    table = []
+    for x in exponents:
+        table.append(int("1" + "0" * x))
+    table = sorted(table)
+    ordinal = 0
+    for p in table:
+        if p <= value:
+            ordinal += 1
+    largest_ordinal = ordinal == len(table)
 
     # Consider the biggest power of 10 that is smaller than value
     ordinal -= 1
